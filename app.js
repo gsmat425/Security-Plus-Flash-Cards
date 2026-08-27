@@ -132,33 +132,16 @@ const ITEMS = [
 // The preview iframe blocks browser storage, so SR state is persisted by a small
 // backend keyed per visitor (X-Visitor-Id). If the backend is unreachable the
 // app keeps working from in-memory state for the session.
-const SR_API = 'port/8000'.startsWith('__') ? 'http://localhost:8000' : 'port/8000';
+const SR_API = '';
 let srState = {};
-let srBackend = false; // true once a backend round-trip succeeds
+let srBackend = false;
 
 async function loadSR() {
-  try {
-    const res = await fetch(`${SR_API}/api/sr`, { cache: 'no-store' });
-    if (!res.ok) throw new Error('http ' + res.status);
-    const data = await res.json();
-    if (data && data.state && typeof data.state === 'object') srState = data.state;
-    srBackend = true;
-  } catch (e) {
-    srBackend = false; // in-memory only
-  }
+  srBackend = false;
 }
 function saveSR() {
-  if (!srBackend) return; // nothing to persist to; in-memory copy already updated
-  try {
-    fetch(`${SR_API}/api/sr`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ state: srState }),
-      keepalive: true,
-    }).catch(() => {});
-  } catch (e) { /* best effort */ }
+  return;
 }
-
 // ===== Spaced repetition (Leitner) =====
 // Boxes 1-5. Intervals: B1 now (1m), B2 10m, B3 1h, B4 1d, B5 3d.
 const INTERVALS = [0, 1*60*1000, 10*60*1000, 60*60*1000, 24*60*60*1000, 3*24*60*60*1000];
