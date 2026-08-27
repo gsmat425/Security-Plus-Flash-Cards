@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Security+ (SY0-701) study tool — flip cards, multiple-choice quiz, and spaced-repetition review across all five exam domains." />
+  <title>Sec+ Deck · Security+ SY0-701 Flashcards, Quiz & Spaced Repetition</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b1220'/%3E%3Cpath d='M16 5l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V8l8-3z' fill='none' stroke='%2322d3ee' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M12 15l3 3 5-6' fill='none' stroke='%2322d3ee' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700&f[]=general-sans@400,500,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header__inner">
+      <a class="brand" href="#" aria-label="Sec+ Deck home">
+        <svg class="brand__mark" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 4l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V7l8-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M12 14l3 3 5-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="brand__text">Sec+ Deck</span>
+      </a>
+      <div class="header__meta">
+        <span class="exam-tag">SY0-701</span>
+        <button class="theme-toggle" data-theme-toggle aria-label="Switch to light mode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="intro">
+      <p class="intro__eyebrow">CompTIA Security+ · Exam SY0-701</p>
+      <h1 class="intro__title">Master the five domains,<br/><span class="intro__title-accent">one flip at a time.</span></h1>
+      <p class="intro__lede">A complete study deck covering every SY0-701 domain. Flip cards to learn, take the multiple-choice quiz to test recall, and let spaced repetition resurface the cards you struggle with — right when you're about to forget them.</p>
+    </section>
+
+    <!-- Mode switcher -->
+    <nav class="modes" role="tablist" aria-label="Study mode">
+      <button class="mode mode--active" role="tab" aria-selected="true" data-mode="browse">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Browse
+      </button>
+      <button class="mode" role="tab" aria-selected="false" data-mode="quiz">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>
+        Quiz
+      </button>
+      <button class="mode" role="tab" aria-selected="false" data-mode="review">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9 9 0 0 0-9 9z"/><path d="M12 7v5l3 2"/></svg>
+        Review
+      </button>
+    </nav>
+
+    <!-- Toolbar: filters + actions (context-aware) -->
+    <section class="toolbar" aria-label="Deck controls">
+      <div class="filters" role="group" aria-label="Filter by domain">
+        <button class="chip chip--active" data-domain="all">All<span class="chip__count" id="count-all"></span></button>
+        <button class="chip" data-domain="1">1 · Concepts</button>
+        <button class="chip" data-domain="2">2 · Threats</button>
+        <button class="chip" data-domain="3">3 · Architecture</button>
+        <button class="chip" data-domain="4">4 · Operations</button>
+        <button class="chip" data-domain="5">5 · Program Mgmt</button>
+      </div>
+      <div class="toolbar__actions" id="toolbar-actions">
+        <button class="btn btn--ghost" id="shuffle-btn" aria-label="Shuffle deck">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+          Shuffle
+        </button>
+        <button class="btn btn--ghost" id="reset-btn" aria-label="Reset progress">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          Reset
+        </button>
+      </div>
+    </section>
+
+    <!-- BROWSE VIEW -->
+    <section class="view view--browse is-active" id="view-browse" role="tabpanel" aria-label="Browse flashcards">
+      <div class="card-stage">
+        <div class="counter"><span id="card-position">1</span><span class="counter__sep">/</span><span id="card-total">1</span></div>
+        <div class="card" id="card" role="button" tabindex="0" aria-label="Flashcard. Tap to flip.">
+          <div class="card__face card__face--front">
+            <span class="card__domain" id="card-domain">Domain</span>
+            <p class="card__label">Question</p>
+            <p class="card__question" id="card-question"></p>
+            <span class="card__hint">Tap to reveal</span>
+          </div>
+          <div class="card__face card__face--back">
+            <span class="card__domain card__domain--back" id="card-domain-back">Domain</span>
+            <p class="card__label">Answer</p>
+            <p class="card__answer" id="card-answer"></p>
+            <span class="card__hint">Tap to flip back</span>
+          </div>
+        </div>
+        <div class="card-nav">
+          <button class="btn btn--nav" id="prev-btn" aria-label="Previous card"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Prev</button>
+          <button class="btn btn--known" id="known-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span id="known-label">Mark known</span></button>
+          <button class="btn btn--nav btn--nav-next" id="next-btn" aria-label="Next card">Next<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+      </div>
+      <div class="progress" aria-label="Study progress">
+        <div class="progress__row">
+          <span class="progress__label">Progress</span>
+          <span class="progress__stats"><span id="seen-count">0</span> seen · <span id="known-count">0</span> known · <span id="remaining-count">0</span> left</span>
+        </div>
+        <div class="progress__bar" aria-hidden="true"><div class="progress__fill" id="progress-fill"></div></div>
+        <p class="progress__note">Keyboard: <kbd>Space</kbd> flip · <kbd>←</kbd><kbd>→</kbd> navigate · <kbd>S</kbd> shuffle · <kbd>K</kbd> mark known</p>
+      </div>
+    </section>
+
+    <!-- QUIZ VIEW -->
+    <section class="view view--quiz" id="view-quiz" role="tabpanel" aria-label="Multiple-choice quiz" hidden>
+      <div class="card-stage">
+        <div class="quiz__meta">
+          <div class="counter"><span id="quiz-position">1</span><span class="counter__sep">/</span><span id="quiz-total">1</span></div>
+          <div class="quiz__score">Score <span id="quiz-score">0</span> / <span id="quiz-answered">0</span></div>
+        </div>
+        <div class="quiz-card">
+          <span class="card__domain" id="quiz-domain">Domain</span>
+          <p class="card__label">Question</p>
+          <p class="card__question" id="quiz-question"></p>
+          <div class="options" id="quiz-options" role="group" aria-label="Answer choices"></div>
+          <div class="feedback" id="quiz-feedback" hidden>
+            <p class="feedback__verdict" id="quiz-verdict"></p>
+            <p class="feedback__explain" id="quiz-explain"></p>
+          </div>
+        </div>
+        <div class="card-nav">
+          <button class="btn btn--nav btn--nav-next" id="quiz-next-btn" disabled>Next<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+      </div>
+      <div class="progress" aria-label="Quiz progress">
+        <div class="progress__bar" aria-hidden="true"><div class="progress__fill" id="quiz-progress-fill"></div></div>
+        <p class="progress__note">Choose an answer for instant feedback. Tap <kbd>N</kbd> or Next to continue.</p>
+      </div>
+    </section>
+
+    <!-- REVIEW VIEW (spaced repetition) -->
+    <section class="view view--review" id="view-review" role="tabpanel" aria-label="Spaced-repetition review" hidden>
+      <div class="card-stage">
+        <div class="sr__stats" id="sr-stats">
+          <span class="sr__stat"><strong id="sr-due">0</strong> due</span>
+          <span class="sr__stat"><strong id="sr-unseen">0</strong> new</span>
+          <span class="sr__stat"><strong id="sr-learned">0</strong> learned</span>
+          <span class="sr__stat"><strong id="sr-total">0</strong> total</span>
+        </div>
+        <div class="quiz-card" id="sr-card">
+          <div class="sr__session-meta">
+            <span class="card__domain" id="sr-domain">Domain</span>
+            <div class="counter"><span id="sr-position">0</span><span class="counter__sep">/</span><span id="sr-session-total">0</span> in session</div>
+          </div>
+          <p class="card__label">Question</p>
+          <p class="card__question" id="sr-question"></p>
+          <div class="options" id="sr-options" role="group" aria-label="Answer choices"></div>
+          <div class="feedback" id="sr-feedback" hidden>
+            <p class="feedback__verdict" id="sr-verdict"></p>
+            <p class="feedback__explain" id="sr-explain"></p>
+          </div>
+        </div>
+        <div class="card-nav">
+          <button class="btn btn--nav btn--nav-next" id="sr-continue-btn" disabled>Continue<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+        <div class="sr__summary" id="sr-summary" hidden>
+          <h2 class="sr__summary-title">Session complete</h2>
+          <p class="sr__summary-text" id="sr-summary-text"></p>
+          <button class="btn btn--primary" id="sr-restart-btn">Start next review</button>
+        </div>
+      </div>
+      <div class="progress" aria-label="Review progress">
+        <div class="progress__bar" aria-hidden="true"><div class="progress__fill" id="sr-progress-fill"></div></div>
+        <p class="progress__note" id="sr-persistence-note">Progress saves on this device when browser storage is available; otherwise it lasts for this session.</p>
+      </div>
+    </section>
+
+    <section class="domains" aria-label="Domain overview">
+      <h2 class="domains__title">Exam blueprint</h2>
+      <div class="domains__grid">
+        <article class="domain-card"><span class="domain-card__num">1</span><h3>General Security Concepts</h3><span class="domain-card__weight">12%</span><p>CIA triad, AAA, zero trust, security controls, cryptography basics &amp; PKI.</p></article>
+        <article class="domain-card"><span class="domain-card__num">2</span><h3>Threats, Vulnerabilities &amp; Mitigations</h3><span class="domain-card__weight">22%</span><p>Threat actors, attack types, malware, social engineering, IoCs, threat modeling.</p></article>
+        <article class="domain-card"><span class="domain-card__num">3</span><h3>Security Architecture</h3><span class="domain-card__weight">18%</span><p>Network security, cloud &amp; virtualization, segmentation, encryption, resilience.</p></article>
+        <article class="domain-card domain-card--accent"><span class="domain-card__num">4</span><h3>Security Operations</h3><span class="domain-card__weight">28%</span><p>SIEM &amp; monitoring, incident response, forensics, IAM, vulnerability mgmt, automation.</p></article>
+        <article class="domain-card"><span class="domain-card__num">5</span><h3>Security Program Management</h3><span class="domain-card__weight">20%</span><p>Governance, risk management, compliance, policies, third-party &amp; vendor risk.</p></article>
+      </div>
+      <p class="domains__source">Domain weights per the official CompTIA Security+ SY0-701 exam objectives.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Sec+ Deck · an unofficial study aid. Not affiliated with or endorsed by CompTIA.</p>
+  </footer>
+
+  <script src="app.js"></script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
+</html>
